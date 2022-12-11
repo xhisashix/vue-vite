@@ -2,15 +2,34 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import Push from 'push.js';
 
+console.log("通知の許可: " + Push.Permission.has())
+
+let notificationConfirm = () => {
+  let arrow = confirm('通知を受け取りますか。');
+  console.log(arrow)
+  return arrow;
+}
+
 let notification = () => {
   Push.create("Hello world!", {
       body: "How's it hangin'?",
       timeout: 4000,
+      link: 'http://google.com',
       onClick: function () {
           window.focus();
+          window.open(
+            'http://google.com',
+          )
           this.close();
       }
   });
+}
+
+
+if(notificationConfirm()) {
+  notification()
+}else {
+  console.log('通知が許可されませんでした。')
 }
 </script>
 
@@ -23,7 +42,6 @@ let notification = () => {
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <button @click="notification">Button</button>
   <HelloWorld msg="Vite + Vue" />
 </template>
 
