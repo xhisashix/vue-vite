@@ -1,8 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import Push from 'push.js';
-
-Push.create('test')
 
 defineProps({
   msg: String,

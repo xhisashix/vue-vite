@@ -1,6 +1,17 @@
 <script setup>
 import HelloWorld from "./components/HelloWorld.vue";
+import Push from 'push.js';
 
+let notification = () => {
+  Push.create("Hello world!", {
+      body: "How's it hangin'?",
+      timeout: 4000,
+      onClick: function () {
+          window.focus();
+          this.close();
+      }
+  });
+}
 </script>
 
 <template>
@@ -12,6 +23,7 @@ import HelloWorld from "./components/HelloWorld.vue";
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  <button @click="notification">Button</button>
   <HelloWorld msg="Vite + Vue" />
 </template>
 
